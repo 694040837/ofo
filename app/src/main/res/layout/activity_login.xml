@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="espressofirst.android.vogella.com.ofo.LoginActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="ofo"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text=" 小黄车"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="输入手机号"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="输入右边数字"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="136dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginStart="11dp"
+        android:text="获取短信验证码"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/editText3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:text="欢迎你"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="134dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="输入短信验证码"
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="142dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="41dp"
+        android:text="登录/注册"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+</android.support.constraint.ConstraintLayout>
