@@ -2,6 +2,7 @@ package espressofirst.android.vogella.com.ofo;
 
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -16,13 +17,20 @@ import android.widget.Toast;
 
 import com.mob.MobSDK;
 
+import org.litepal.LitePal;
+import org.litepal.crud.LitePalSupport;
+import org.litepal.tablemanager.Connector;
+
+import java.util.List;
+
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
+import espressofirst.android.vogella.com.ofo.db.user;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     String APPKEY = "2abe56efce7a0";
-    String APPSECRET = "e28f48191bf0cb7ab83975e31afc9af8";
+    String APPSECRET = "e28f48191bf0cb7ab83975e31afc9af8";//Mob开发平台提供的SDK的使用key和密码
     // 手机号输入框
     private EditText inputPhoneEt;
     // 验证码输入框
@@ -156,16 +164,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Object data = msg.obj;
                 Log.e("event", "event=" + event);
                 if (result == SMSSDK.RESULT_COMPLETE) {
-                    // 短信注册成功后，返回MainActivity,然后提示
+                    // 短信注册成功后，返回LoginActivity,然后提示
                     if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {// 提交验证码成功
                         Toast.makeText(getApplicationContext(), "提交验证码成功",
                                 Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this,
-                                Login2Activity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("userName",inputPhoneEt.getText().toString().trim());
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        SQLiteDatabase db = Connector.getDatabase();
+                        String phonenum = inputPhoneEt.getText().toString().trim();
+                        //Log.d("LoginActivity",phonenum);
+                        int flag = 0;
+                        List<user> users = LitePal.findAll(user.class);
+                        for(user User:users){
+                            if(User.getPhone_number().equals(phonenum)){
+                                app App = (app) getApplication();
+                                App.setLoginUser(User);
+                                flag = 1;
+                            }
+                        }
+                        if(flag==1){             //已经注册过了
+                            //跳转前清空活动栈
+
+                            Intent intent = new Intent(LoginActivity.this,
+                                    MapActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            /*Bundle bundle = new Bundle();
+                            bundle.putString("userName",inputPhoneEt.getText().toString().trim());
+                            intent.putExtras(bundle);*/
+                            flag = 0;
+                            startActivity(intent);
+                        }
+                        else {                //没注册呢，跳去注册
+                            Intent intent = new Intent(LoginActivity.this,
+                                    Login2Activity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("userName",inputPhoneEt.getText().toString().trim());
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
                     } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                         Toast.makeText(getApplicationContext(), "正在获取验证码",
                                 Toast.LENGTH_SHORT).show();

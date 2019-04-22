@@ -9,6 +9,7 @@ import java.util.Random;
 
 /**
  * Created by 苏爷 on 2019/4/5.
+ * 生成图片验证码的
  */
 
 public class Code {
